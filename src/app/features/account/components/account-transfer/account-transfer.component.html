@@ -1,0 +1,76 @@
+<div class="acc-transfer">
+
+  <div class="form-header">
+
+  <h2 >Transfer Funds</h2>
+<p> Make transfers between your accounts</p>
+</div>
+
+
+<form [formGroup]="form" (ngSubmit)="onTransfer()">
+
+  <!-- FROM account -->
+  <mat-form-field appearance="outline">
+    <mat-label>From</mat-label>
+    <mat-select formControlName="from">
+      <mat-option *ngFor="let acc of accounts" [value]="acc.id">
+        {{ acc.name }} — ${{ acc.balance }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="form.get('from')?.hasError('required') && form.get('from')?.touched">
+      Source account is required
+    </mat-error>
+  </mat-form-field>
+
+  
+  <!-- TO account -->
+  <mat-form-field appearance="outline">
+    <mat-label>To</mat-label>
+    <mat-select formControlName="to">
+      <mat-option *ngFor="let acc of accounts" [value]="acc.id">
+        {{ acc.name }} — ${{ acc.balance }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="form.get('to')?.hasError('required') && form.get('to')?.touched">
+      Destination account is required
+    </mat-error>
+  </mat-form-field>
+
+  
+  <!-- AMOUNT -->
+  <mat-form-field appearance="outline">
+    <mat-label>Amount</mat-label>
+    <input matInput type="number" formControlName="amount" />
+    <mat-error *ngIf="form.get('amount')?.hasError('required') && form.get('amount')?.touched">
+      Amount is required
+    </mat-error>
+    <mat-error *ngIf="form.get('amount')?.hasError('min') && form.get('amount')?.touched">
+      Must be at least $1
+    </mat-error>
+    <mat-error *ngIf="form.hasError('insufficientFunds') && form.get('amount')?.touched">
+      Insufficient funds in source account
+    </mat-error>
+  </mat-form-field>
+
+ 
+  <div class="form-error" *ngIf="form.hasError('sameAccount') && (form.get('from')?.touched || form.get('to')?.touched)">
+    From and To accounts must be different
+  </div>
+
+  <div>
+    <br/>
+  <button mat-raised-button color="primary" [disabled]="form.invalid">
+    Transfer
+  </button>
+</div>
+
+<br/>
+<div>
+  <mat-option *ngFor="let acc of accounts" [value]="acc.id">
+  {{ acc.name }} — ${{ acc.balance }}
+</mat-option>
+
+</div>
+
+</form>
+</div>

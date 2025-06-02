@@ -1,0 +1,28 @@
+<div class="acc-history">
+<div class="form-header">
+
+  <h2 >View Transaction History</h2>
+<p> Review your past transactions in detail</p>
+</div>
+
+<div>
+
+<mat-form-field appearance="outline">
+  <mat-label>Select an Account</mat-label>
+  <mat-select [(ngModel)]="selectedAccountId" (selectionChange)="onSelect()">
+    <mat-option *ngFor="let acc of accounts" [value]="acc.id">{{ acc.name }}</mat-option>
+  </mat-select>
+</mat-form-field>
+</div>
+
+<div class="tx-record" *ngFor="let tx of transactions">
+  <mat-card>
+    <mat-card-content>
+      {{ tx.date | date:'short' }} — From: {{ getAccountName(tx.fromAccountId)  }}  To: {{ getAccountName(tx.toAccountId) }} — Amount: ${{ tx.amount }}
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+
+</div>
