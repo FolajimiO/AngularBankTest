@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AccountService } from '../../services/account.service';
 import { TransactionService } from '../../services/transaction.service';
@@ -18,10 +24,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   templateUrl: './account-transfer.component.html',
-    styleUrls: ['./account-transfer.component.scss']
+  styleUrls: ['./account-transfer.component.scss'],
 })
 export class AccountTransferComponent {
   form: FormGroup;
@@ -38,7 +44,10 @@ export class AccountTransferComponent {
         amount: [null, [Validators.required, Validators.min(1)]],
       },
       {
-        validators: [this.accountsNotSameValidator, this.balanceSufficientValidator.bind(this)],
+        validators: [
+          this.accountsNotSameValidator,
+          this.balanceSufficientValidator.bind(this),
+        ],
       }
     );
   }
@@ -62,29 +71,29 @@ export class AccountTransferComponent {
     return amount > fromAcc.balance ? { insufficientFunds: true } : null;
   }
 
-onTransfer() {
-  this.form.markAllAsTouched(); // Show validation messages
-  if (this.form.invalid) return;
+  onTransfer() {
+    this.form.markAllAsTouched(); // Show validation messages
+    if (this.form.invalid) return;
 
-  const { from, to, amount } = this.form.value;
+    const { from, to, amount } = this.form.value;
 
-  const fromAcc = this.accountService.getAccountById(from);
-  const toAcc = this.accountService.getAccountById(to);
+    const fromAcc = this.accountService.getAccountById(from);
+    const toAcc = this.accountService.getAccountById(to);
 
- 
-  if (!fromAcc || !toAcc) return;
+    if (!fromAcc || !toAcc) return;
 
-  fromAcc.balance -= amount;
-  toAcc.balance += amount;
+    fromAcc.balance -= amount;
+    toAcc.balance += amount;
 
-  this.accountService.updateAccount(fromAcc);
-  this.accountService.updateAccount(toAcc);
+    this.accountService.updateAccount(fromAcc);
+    this.accountService.updateAccount(toAcc);
 
-  this.txService.recordTransaction({
-    fromAccountId: from,
-    toAccountId: to,
-    amount
-  });
+    this.txService.recordTransaction({
+      fromAccountId: from,
+      toAccountId: to,
+      amount,
+    });
 
-  this.form.reset();
-}}
+    this.form.reset();
+  }
+}

@@ -19,10 +19,10 @@ import { MatCardModule } from '@angular/material/card';
     MatSelectModule,
     MatListModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
   ],
   templateUrl: './transaction-history.component.html',
-  styleUrls: ['./transaction-history.component.scss']
+  styleUrls: ['./transaction-history.component.scss'],
 })
 export class TransactionHistoryComponent {
   selectedAccountId = '';
@@ -36,13 +36,15 @@ export class TransactionHistoryComponent {
   get accounts() {
     return this.accountService.getAllAccounts();
   }
-  
+
   getAccountName(accountId: string): string {
-  const account = this.accounts.find(acc => acc.id === accountId);
-  return account ? account.name : accountId; // fallback to ID if not found
-}
+    const account = this.accounts.find((acc) => acc.id === accountId);
+    return account ? account.name : accountId; // fallback to ID if not found
+  }
 
   onSelect(): void {
-    this.transactions = this.txService.getTransactionsByAccount(this.selectedAccountId);
+    this.transactions = this.txService.getTransactionsByAccount(
+      this.selectedAccountId
+    );
   }
 }

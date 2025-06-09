@@ -1,23 +1,20 @@
-.nav{
-    background-color: 	#131f2f;
-    height: 70px;
-    padding-inline: 70px;
-    margin-bottom: 100px;
+.nav {
+  background-color: #131f2f;
+  height: 70px;
+  padding-inline: 70px;
+  margin-bottom: 100px;
 }
 
-
-
-.nav-buttons{
-color: black;
-background-color: white;
-border-block: black;
+.nav-buttons {
+  color: black;
+  background-color: white;
+  border-block: black;
 }
 
-:hover .nav-buttons button{
-    border-radius: 0px;
-    background-color: #ebe9da;
+:hover .nav-buttons button {
+  border-radius: 0px;
+  background-color: #ebe9da;
 }
-    
 
 .app-toolbar {
   display: flex;
@@ -32,7 +29,7 @@ border-block: black;
 
 .logo {
   height: 100px;
-  width: auto; 
+  width: auto;
   margin-right: 10px;
 }
 

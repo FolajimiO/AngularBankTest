@@ -12,14 +12,14 @@ export class TransactionService {
     const newTx: Transaction = {
       ...tx,
       id: uuid(),
-      date: new Date()
+      date: new Date(),
     };
     this.transactionsSubject.next([...this.transactionsSubject.value, newTx]);
   }
 
   getTransactionsByAccount(accountId: string): Transaction[] {
-    return this.transactionsSubject.value.filter(tx =>
-      tx.fromAccountId === accountId || tx.toAccountId === accountId
+    return this.transactionsSubject.value.filter(
+      (tx) => tx.fromAccountId === accountId || tx.toAccountId === accountId
     );
   }
 }

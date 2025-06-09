@@ -10,11 +10,15 @@ const routes: Routes = [
   { path: 'create', component: AccountCreationComponent },
   { path: 'transfer', component: AccountTransferComponent },
   { path: 'history', component: TransactionHistoryComponent },
-  { path: '', redirectTo: 'create', pathMatch: 'full' }
+  { path: '', redirectTo: 'create', pathMatch: 'full' },
 ];
 
 export const appRoutingProviders = [
-  importProvidersFrom(BrowserModule, BrowserAnimationsModule, RouterModule.forRoot(routes))
+  importProvidersFrom(
+    BrowserModule,
+    BrowserAnimationsModule,
+    RouterModule.forRoot(routes)
+  ),
 ];
 
 export const appRouting = provideRouter(routes);

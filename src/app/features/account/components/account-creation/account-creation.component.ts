@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -17,10 +22,10 @@ import { Router } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
-    SharedModule
+    SharedModule,
   ],
   templateUrl: './account-creation.component.html',
-  styleUrls: ['./account-creation.component.scss']
+  styleUrls: ['./account-creation.component.scss'],
 })
 export class AccountCreationComponent {
   accountForm: FormGroup;
@@ -30,28 +35,31 @@ export class AccountCreationComponent {
     private fb: FormBuilder,
     private accountService: AccountService,
     private router: Router
-
   ) {
     this.accountForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(50),
+        ],
+      ],
       type: ['chequing'],
-      balance: [null, [Validators.required, Validators.min(1)]]
+      balance: [null, [Validators.required, Validators.min(1)]],
     });
   }
 
   onSubmit(): void {
     if (this.accountForm.valid) {
       this.accountService.createAccount(this.accountForm.value);
-       this.successMessage = ` Congratulations ${this.accountForm.value.name}, your ${this.accountForm.value.type} account has been successfully created 🎉`;
-      
-      this.accountForm.reset({ type: 'chequing' });
-    
+      this.successMessage = ` Congratulations ${this.accountForm.value.name}, your ${this.accountForm.value.type} account has been successfully created 🎉`;
 
-      
+      this.accountForm.reset({ type: 'chequing' });
     }
   }
 
   goToTransfer() {
-  this.router.navigate(['/transfer']); 
-}
+    this.router.navigate(['/transfer']);
+  }
 }

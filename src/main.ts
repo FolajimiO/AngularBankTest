@@ -28,7 +28,6 @@ bootstrapApplication(AppComponent, {
       MatButtonModule,
       MatCardModule,
       SharedModule
-
-    )
-  ]
-}).catch(err => console.error(err));
+    ),
+  ],
+}).catch((err) => console.error(err));

@@ -6,6 +6,6 @@ import { CustomButtonComponent } from './components/custom-button/custom-button.
 @NgModule({
   declarations: [CustomButtonComponent],
   imports: [CommonModule, MatButtonModule],
-  exports: [CustomButtonComponent]
+  exports: [CustomButtonComponent],
 })
 export class SharedModule {}

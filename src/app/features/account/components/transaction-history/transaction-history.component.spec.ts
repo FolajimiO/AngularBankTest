@@ -8,9 +8,8 @@ describe('TransactionHistoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TransactionHistoryComponent]
-    })
-    .compileComponents();
+      imports: [TransactionHistoryComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TransactionHistoryComponent);
     component = fixture.componentInstance;

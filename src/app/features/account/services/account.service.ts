@@ -14,11 +14,11 @@ export class AccountService {
   }
 
   getAccountById(id: string): Account | undefined {
-    return this.accountsSubject.value.find(a => a.id === id);
+    return this.accountsSubject.value.find((a) => a.id === id);
   }
 
   updateAccount(updated: Account) {
-    const updatedAccounts = this.accountsSubject.value.map(acc =>
+    const updatedAccounts = this.accountsSubject.value.map((acc) =>
       acc.id === updated.id ? updated : acc
     );
     this.accountsSubject.next(updatedAccounts);
