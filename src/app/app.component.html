@@ -6,11 +6,23 @@
   <span class="spacer"></span>
 
   <div class="nav-buttons">
-    <button mat-button routerLink="/create">Create Account</button>
+    <app-custom-button
+      routerLink="/create"
+      [label]="'Create Account'"
+      [buttonClass]="'btn-header'"
+    ></app-custom-button>
 
     <ng-container *ngIf="hasAccounts$ | async">
-      <button mat-button routerLink="/transfer">Transfer Funds</button>
-      <button mat-button routerLink="/history">Transaction History</button>
+      <app-custom-button
+        routerLink="/transfer"
+        [label]="'Transfer Funds'"
+        [buttonClass]="'btn-header'"
+      ></app-custom-button>
+      <app-custom-button
+        routerLink="/history"
+        [label]="'Transaction History'"
+        [buttonClass]="'btn-header'"
+      ></app-custom-button>
     </ng-container>
   </div>
 </mat-toolbar>

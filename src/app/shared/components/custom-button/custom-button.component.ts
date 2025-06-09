@@ -8,9 +8,5 @@ import { Component, Input } from '@angular/core';
 })
 export class CustomButtonComponent {
   @Input() label: string = 'Submit';
-  @Input() accountType: string = 'chequing'; // Default to chequing
-
-  get buttonClass(): string {
-    return this.accountType === 'chequing' ? 'btn-chequing' : 'btn-savings';
-  }
+  @Input() buttonClass: string = 'btn-default';
 }

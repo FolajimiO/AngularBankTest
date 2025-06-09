@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-account-transfer',
@@ -25,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
+    MatCardModule,
   ],
   templateUrl: './account-transfer.component.html',
   styleUrls: ['./account-transfer.component.scss'],
@@ -97,3 +99,83 @@ export class AccountTransferComponent {
     this.form.reset();
   }
 }
+
+//Template-driven Form implementation
+/*
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AccountService } from '../../services/account.service';
+import { TransactionService } from '../../services/transaction.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+
+@Component({
+  selector: 'app-account-transfer',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule,
+  ],
+  templateUrl: './account-transfer.component.html',
+  styleUrls: ['./account-transfer.component.scss'],
+})
+export class AccountTransferComponent {
+  from: string = '';
+  to: string = '';
+  amount: number | null = null;
+
+  error: string = '';
+
+  constructor(
+    private accountService: AccountService,
+    private txService: TransactionService
+  ) {}
+
+  get accounts() {
+    return this.accountService.getAllAccounts();
+  }
+
+  onTransfer(formValid: boolean) {
+    this.error = '';
+    if (!formValid || this.amount == null || this.from === this.to) {
+      this.error = 'Invalid form. Please check your inputs.';
+      return;
+    }
+
+    const fromAcc = this.accountService.getAccountById(this.from);
+    const toAcc = this.accountService.getAccountById(this.to);
+
+    if (!fromAcc || !toAcc) return;
+
+    if (this.amount > fromAcc.balance) {
+      this.error = 'Insufficient funds in source account.';
+      return;
+    }
+
+    fromAcc.balance -= this.amount;
+    toAcc.balance += this.amount;
+
+    this.accountService.updateAccount(fromAcc);
+    this.accountService.updateAccount(toAcc);
+
+    this.txService.recordTransaction({
+      fromAccountId: this.from,
+      toAccountId: this.to,
+      amount: this.amount,
+    });
+
+    this.amount = null;
+    this.from = '';
+    this.to = '';
+  }
+}
+
+  
+*/

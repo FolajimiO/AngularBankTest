@@ -62,4 +62,14 @@ export class AccountCreationComponent {
   goToTransfer() {
     this.router.navigate(['/transfer']);
   }
+
+  get dynamicLabel(): string {
+    const type = this.accountForm.get('type')?.value || '';
+    return `Create ${type} account`;
+  }
+
+  get dynamicButtonClass(): string {
+    const type = this.accountForm.get('type')?.value || 'default';
+    return `btn-${type}`;
+  }
 }

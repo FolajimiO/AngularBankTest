@@ -3,7 +3,11 @@
     {{ successMessage }}
 
     <div class="make-transfer">
-      <app-custom-button [label]="'Make a Transfer'" (click)="goToTransfer()">
+      <app-custom-button
+        [label]="'Make a Transfer'"
+        [buttonClass]="'btn-default'"
+        (click)="goToTransfer()"
+      >
       </app-custom-button>
     </div>
   </div>
@@ -33,13 +37,11 @@
         <mat-radio-button value="savings">Savings</mat-radio-button>
       </mat-radio-group>
     </div>
-
     <div class="create-acc-btn">
       <app-custom-button
-        [label]="'Create ' + accountForm.get('type')?.value + ' account'"
-        [accountType]="accountForm.get('type')?.value"
-      >
-      </app-custom-button>
+        [label]="dynamicLabel"
+        [buttonClass]="dynamicButtonClass"
+      ></app-custom-button>
     </div>
   </form>
 </div>

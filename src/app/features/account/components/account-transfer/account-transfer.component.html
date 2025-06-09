@@ -77,16 +77,82 @@
 
     <div>
       <br />
+
       <button mat-raised-button color="primary" [disabled]="form.invalid">
         Transfer
       </button>
     </div>
 
     <br />
-    <div>
-      <mat-option *ngFor="let acc of accounts" [value]="acc.id">
-        {{ acc.name }} — ${{ acc.balance }}
-      </mat-option>
+
+    <div class="account-list">
+      <mat-card *ngFor="let acc of accounts" class="account-card">
+        <mat-card-title>{{ acc.name }}</mat-card-title>
+        <mat-card-subtitle>Account ID: {{ acc.id }}</mat-card-subtitle>
+        <mat-card-content>
+          <p>Balance: ${{ acc.balance }}</p>
+        </mat-card-content>
+      </mat-card>
     </div>
   </form>
 </div>
+
+<!-- 
+<div class="acc-transfer">
+  <div class="form-header">
+    <h2>Transfer Funds</h2>
+    <p>Make transfers between your accounts</p>
+  </div>
+
+  <form #transferForm="ngForm" (ngSubmit)="onTransfer(transferForm.valid)">
+
+    
+    <mat-form-field appearance="outline">
+      <mat-label>From</mat-label>
+      <mat-select [(ngModel)]="from" name="from" required>
+        <mat-option *ngFor="let acc of accounts" [value]="acc.id">
+          {{ acc.name }} — ${{ acc.balance }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    
+    <mat-form-field appearance="outline">
+      <mat-label>To</mat-label>
+      <mat-select [(ngModel)]="to" name="to" required>
+        <mat-option *ngFor="let acc of accounts" [value]="acc.id">
+          {{ acc.name }} — ${{ acc.balance }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Amount</mat-label>
+      <input
+        matInput
+        type="number"
+        name="amount"
+        [(ngModel)]="amount"
+        required
+        min="1"
+      />
+    </mat-form-field>
+
+    
+    <div class="form-error" *ngIf="from === to && from !== ''">
+      From and To accounts must be different
+    </div>
+
+    <div class="form-error" *ngIf="error">{{ error }}</div>
+
+    <br />
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!transferForm.valid || from === to"
+    >
+      Transfer
+    </button>
+  </form>
+</div> -->

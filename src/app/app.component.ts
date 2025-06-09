@@ -5,11 +5,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { AccountService } from './features/account/services/account.service';
 import { Observable, map } from 'rxjs';
+import { SharedModule } from './shared/shared.module';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterModule, MatToolbarModule, MatButtonModule, AsyncPipe, NgIf],
+  imports: [
+    RouterModule,
+    MatToolbarModule,
+    MatButtonModule,
+    AsyncPipe,
+    NgIf,
+    SharedModule,
+  ],
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
